@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Launch Mavros -->
+    <arg name="drone_name" default="drone" />
+    <arg name="mocap_frequency" default="50"/>
+
+    <!-- Run mocap to mavros node-->
+    <rosparam param="drone_name" subst_value="True">$(arg drone_name)</rosparam>
+    <rosparam param="external_vision_type">"vision"</rosparam>  <!--mocap-->
+    <rosparam param="mocap_frequency" subst_value="True">$(arg mocap_frequency)</rosparam>
+    
+    <node name="mocap_to_mavros" pkg="mocap_to_mavros_sim" type="mocap_to_mavros_sim_node" output="screen"/>
+
+</launch>
