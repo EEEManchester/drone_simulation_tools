@@ -19,7 +19,10 @@ void state_cb(const mavros_msgs::State::ConstPtr& msg){
 int main(int argc, char **argv)
 {
     ros::init(argc, argv, "offb_node");
+    // create global node handle for publishing and subscribing
     ros::NodeHandle nh;
+    //create local node handle for private parameters
+    ros::NodeHandle nh_loc("~");
 
     ros::Subscriber state_sub = nh.subscribe<mavros_msgs::State>
             ("mavros/state", 10, state_cb);
@@ -45,7 +48,8 @@ int main(int argc, char **argv)
     geometry_msgs::PoseStamped pose;
     pose.header.stamp = ros::Time::now();
     float take_off_height;
-    nh.getParam("take_off_height",take_off_height);
+    nh_loc.getParam("take_off_height",take_off_height);
+    ROS_INFO_STREAM("take_off_height "<< take_off_height);
 
     pose.pose.position.x = 0;
     pose.pose.position.y = 0;
