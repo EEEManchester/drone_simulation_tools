@@ -20,6 +20,9 @@ catkin_package(
 #  DEPENDS system_lib
 )
 
+
+find_package(Eigen3 3.3 REQUIRED NO_MODULE)
+
 ###########
 ## Build ##
 ###########
@@ -38,3 +41,20 @@ target_link_libraries(
 	drone_offboard_example_node
 	${catkin_LIBRARIES}
 	)
+
+add_executable(drone_offboard_example_node_NED src/off_board_NED.cpp)
+
+target_link_libraries(
+	drone_offboard_example_node_NED
+	${catkin_LIBRARIES}
+	Eigen3::Eigen
+	)
+
+
+add_executable(drone_offboard_example_node_raw src/off_board_raw.cpp)
+
+target_link_libraries(
+		drone_offboard_example_node_raw
+		${catkin_LIBRARIES}
+		Eigen3::Eigen
+		)

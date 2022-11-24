@@ -5,7 +5,7 @@
  <arg name="drone_take_off_absolute_height" value="4.25" />
 
   <!-- Use official example to take off drone -->
-  <node name="drone_take_off_node" pkg="drone_offboard_sim" type="drone_offboard_example_node" output="screen">
+  <node name="drone_take_off_node" pkg="drone_offboard_sim" type="drone_offboard_example_node_raw" output="screen">
     <param name="take_off_height" value="$(arg drone_take_off_absolute_height)"/> 
   </node>
 </launch>
