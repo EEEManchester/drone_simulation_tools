@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <launch>
 
+<remap from="/vicon/Parl1" to="/vicon/drone" />
+
  <!-- px4 in gazebo -->
  <!-- single drone in gazebo environment-->
   <include file="$(find px4)/launch/posix_sitl.launch">
@@ -25,9 +27,10 @@
  <!-- Pkg fake qualisys-->
  <!-- get drone pose and generte mocap topic vision/drone-->
   <include file="$(find fake_qualisys)/launch/fake_vicon.launch">
-    <arg name="drone_name" value="drone"/>  <!-- output topic is /qualisys/drone -->
+    <arg name="drone_name" value="Parl1"/>  <!-- output topic is /vicon/drone -->
     <arg name="gazebo_drone_link_name" value="iris::base_link"/> <!-- iris::base_link is the base link of drone mode -->
     <arg name="mocap_rate" value="200"/>
+    
 
     <param name="drone_name" type="str" value="$(arg drone_name)"/>
     <param name="link_name" type="str" value="$(arg gazebo_drone_link_name)"/>

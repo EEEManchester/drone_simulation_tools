@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
-  <arg name="drone_name" value="drone"/>  <!-- output topic is /qualisys/drone -->
-  <arg name="gazebo_drone_link_name" value="iris::base_link"/> <!-- iris::base_link is the base link of drone mode -->
+  <arg name="drone_name" default="drone"/>  <!-- output topic is /qualisys/drone -->
+  <arg name="gazebo_drone_link_name" default="iris::base_link"/> <!-- iris::base_link is the base link of drone mode -->
   <arg name="mocap_rate" default="200"/>
 
   <node name="qualisys_$(arg drone_name)" pkg="fake_qualisys" type="fake_qualisys_gazebo_module" output="screen">

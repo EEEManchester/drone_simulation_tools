@@ -9,7 +9,7 @@ find_package(catkin REQUIRED COMPONENTS
 	geometry_msgs
 )
 
-
+find_package(Eigen3 3.3 REQUIRED NO_MODULE)
 
 catkin_package(
 	LIBRARIES 
@@ -26,4 +26,10 @@ include_directories(
 add_executable(mocap_to_mavros_sim_node src/mocap_to_drone_node.cpp)
 target_link_libraries(mocap_to_mavros_sim_node
   ${catkin_LIBRARIES}
+)
+
+add_executable(mocap_to_mavros_sim_node_NED src/mocap_to_drone_node_NED.cpp)
+target_link_libraries(mocap_to_mavros_sim_node_NED
+  ${catkin_LIBRARIES}
+  Eigen3::Eigen
 )
