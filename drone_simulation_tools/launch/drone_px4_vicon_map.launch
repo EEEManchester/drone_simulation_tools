@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<launch>
+
+ <!-- Pkg fake qualisys-->
+ <!-- get drone pose and generte mocap topic vision/drone-->
+  <include file="$(find fake_qualisys)/launch/fake_vicon.launch">
+    <arg name="drone_name" value="drone"/>  <!-- output topic is /qualisys/drone -->
+    <arg name="gazebo_drone_link_name" value="iris::base_link"/> <!-- iris::base_link is the base link of drone mode -->
+    <arg name="mocap_rate" value="200"/>
+
+    <param name="drone_name" type="str" value="$(arg drone_name)"/>
+    <param name="link_name" type="str" value="$(arg gazebo_drone_link_name)"/>
+    <param name="mocap_rate" type="int" value="$(arg mocap_rate)"/>
+  </include>
+
+
+ <!-- Pkg mocap_to_mavros_sim-->
+ <!-- subscrip to /vision/drone and pub to /mavros/vision_pose/pose-->
+  <include file="$(find mocap_to_mavros_sim)/launch/mocap_to_mavros_sim.launch">
+    <!--<arg name="drone_name" default="drone" />-->
+    <arg name="mocap_frequency" value="50"/>
+
+    <rosparam param="drone_name" subst_value="True">$(arg drone_name)</rosparam>
+    <rosparam param="external_vision_type">"vision"</rosparam>  <!--mocap-->
+    <rosparam param="mocap_frequency" subst_value="True">$(arg mocap_frequency)</rosparam>
+  </include>
+
+
+</launch>
