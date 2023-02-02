@@ -165,6 +165,10 @@ venv.bak/
 .spyderproject
 .spyproject
 
+drone_simulation_tools/.vscode/
+
+./drone_simulation_tools/.vscode/*
+
 # Rope project settings
 .ropeproject
 
@@ -214,6 +218,8 @@ Testing
 Makefile
 cmake_install.cmake
 install_manifest.txt
+
+*/.vscode/
 compile_commands.json
 CTestTestfile.cmake
 _deps

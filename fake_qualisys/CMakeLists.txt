@@ -31,4 +31,11 @@ add_executable(fake_vicon_gazebo_module src/fake_Vicon_gazebo_module.cpp)
 target_link_libraries(
 	fake_vicon_gazebo_module
 	${catkin_LIBRARIES}
+	)
+
+add_executable(fake_vicon_experiment_module src/fake_Vicon_experiment_module.cpp)
+
+target_link_libraries(
+	fake_vicon_experiment_module
+		${catkin_LIBRARIES}	
 )
