@@ -14,39 +14,13 @@
 #include "geometry_msgs/TransformStamped.h"
 
 geometry_msgs::TransformStamped drone; // global Vicon message variable
-std::string link_name; // gloabal link_name variable
-bool new_topic_flag = false;
 
-void callback(const gazebo_msgs::LinkStates::ConstPtr& msg)
-{
-  gazebo_msgs::LinkStates Gmsg = *msg;
-
-  for(int i=0;i<Gmsg.name.size();i++)
-  {
-    if(!Gmsg.name[i].compare(link_name))
-    {
-      drone.header.stamp=ros::Time::now();
-
-      drone.transform.translation.x = Gmsg.pose[i].position.x;
-      drone.transform.translation.y = Gmsg.pose[i].position.y;
-      drone.transform.translation.z = Gmsg.pose[i].position.z;
-
-      drone.transform.rotation.w = Gmsg.pose[i].orientation.w;
-      drone.transform.rotation.x = Gmsg.pose[i].orientation.x;
-      drone.transform.rotation.y = Gmsg.pose[i].orientation.y;
-      drone.transform.rotation.z = Gmsg.pose[i].orientation.z;
-
-      new_topic_flag = true;
-      return;
-    }
-  }
-}
 
 // ----------- MAIN FUNCTION --------
 int main(int argc, char **argv)
 {
     // Start ROS
-    ros::init(argc, argv, "fake_vicon_gazebo");
+    ros::init(argc, argv, "fake_vicon_experiment");
 
     // create global node handle for publishing and subscribing
     ros::NodeHandle nh;
@@ -55,7 +29,24 @@ int main(int argc, char **argv)
 
     // set loop rate of vicon
     int rate;
+
+    double drone_post_x; 
+    double drone_post_y; 
+    double drone_post_z; 
+    double drone_att_x; 
+    double drone_att_y; 
+    double drone_att_z;
+    double drone_att_w; 
+
     nh_loc.param("mocap_rate",rate,200);
+    nh_loc.param("drone_position_x",drone_post_x,0.0);
+    nh_loc.param("drone_position_y",drone_post_y,0.0);
+    nh_loc.param("drone_position_z",drone_post_z,0.0);
+    nh_loc.param("drone_attitude_x",drone_att_x,0.0);
+    nh_loc.param("drone_attitude_y",drone_att_y,0.0);
+    nh_loc.param("drone_attitude_z",drone_att_z,0.0);
+    nh_loc.param("drone_attitude_w",drone_att_w,1.0);  
+     
     ros::Rate loop_rate(rate);
     ROS_INFO("Mocap spinning at %d Hz", rate);
 
@@ -63,7 +54,6 @@ int main(int argc, char **argv)
     std::string name;
     nh_loc.getParam("drone_name",name); ///<
 
-    nh_loc.getParam("link_name",link_name); ///< \param Gazebo LinkState frame name
 
     //name = "drone1";
 
@@ -73,16 +63,26 @@ int main(int argc, char **argv)
     //	ros::Publisher publisher for fake vicon message
     ros::Publisher mocap_pub = nh.advertise<geometry_msgs::TransformStamped>("vicon/"+name,1);
 
-    // subscriber for gazebo message
-    ros::Subscriber sub = nh.subscribe("gazebo/link_states",1, callback);
 
     // set immutable sections of vicon message header
     drone.child_frame_id = name;
     drone.header.stamp = ros::Time::now();
+    drone.transform.translation.x = drone_post_x;
+    drone.transform.translation.y = drone_post_y;
+    drone.transform.translation.z = drone_post_z;
+    drone.transform.rotation.w = drone_att_w;
+    drone.transform.rotation.x = drone_att_x;
+    drone.transform.rotation.y = drone_att_y;
+    drone.transform.rotation.z = drone_att_z;
+    drone.header.seq = 1;
 
     while (ros::ok())
     {
         //ROS_WARN_THROTTLE(15,"CAUTION: %s MOCAP TOPICS ARE FAKED",name.data() );
+        drone.header.stamp = ros::Time::now();
+        drone.header.seq++;
+
+        mocap_pub.publish(drone);
 
         // do gazebo callback
         ros::spinOnce();
@@ -90,12 +90,7 @@ int main(int argc, char **argv)
         // sleep, to simulate qualisys processing delay
         loop_rate.sleep();
 
-        // publish previous mocap position and repeat
-        if(new_topic_flag=true)
-        {
-          mocap_pub.publish(drone);
-          new_topic_flag = false;
-        }
+
     }
 
     return 0;

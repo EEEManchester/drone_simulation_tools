@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="drone_name" default="drone"/>  <!-- output topic is /qualisys/drone -->
+  <arg name="gazebo_drone_link_name" default="iris::base_link"/> <!-- iris::base_link is the base link of drone mode -->
+  <arg name="mocap_rate" default="200"/>
+  <!-- drone position -->
+  <arg name="drone_post_x" default="0"/>
+  <arg name="drone_post_y" default="0"/>
+  <arg name="drone_post_z" default="1"/>
+  <!-- drone attitude in quaterion -->
+  <arg name="drone_att_q_x" default="0"/>
+  <arg name="drone_att_q_y" default="0"/>
+  <arg name="drone_att_q_z" default="0"/>
+  <arg name="drone_att_q_w" default="1"/>
+
+  <node name="vicon_fake" pkg="fake_qualisys" type="fake_vicon_experiment_module" output="screen">
+    <param name="drone_name" type="str" value="$(arg drone_name)"/>
+    <param name="link_name" type="str" value="$(arg gazebo_drone_link_name)"/>
+    <param name="mocap_rate" type="int" value="$(arg mocap_rate)"/>
+    <param name="drone_position_x" type="double" value="$(arg drone_post_x)"/>
+    <param name="drone_position_y" type="double" value="$(arg drone_post_y)"/>
+    <param name="drone_position_z" type="double" value="$(arg drone_post_z)"/>
+    <param name="drone_attitude_x" type="double" value="$(arg drone_att_q_x)"/>
+    <param name="drone_attitude_y" type="double" value="$(arg drone_att_q_y)"/>
+    <param name="drone_attitude_z" type="double" value="$(arg drone_att_q_z)"/>
+    <param name="drone_attitude_w" type="double" value="$(arg drone_att_q_w)"/>
+  </node>
+</launch>
