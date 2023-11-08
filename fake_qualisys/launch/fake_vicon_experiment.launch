@@ -4,7 +4,7 @@
   <arg name="gazebo_drone_link_name" default="iris::base_link"/> <!-- iris::base_link is the base link of drone mode -->
   <arg name="mocap_rate" default="200"/>
 
-  <node name="qualisys_fake" pkg="fake_qualisys" type="fake_qualisys_gazebo_module" output="screen">
+  <node name="vicon_fake" pkg="fake_qualisys" type="fake_vicon_experiment_module" output="screen">
     <param name="drone_name" type="str" value="$(arg drone_name)"/>
     <param name="link_name" type="str" value="$(arg gazebo_drone_link_name)"/>
     <param name="mocap_rate" type="int" value="$(arg mocap_rate)"/>

@@ -1,9 +1,15 @@
 <?xml version="1.0"?>
 <launch>
+  <arg name="drone_x" default="0" />
+  <arg name="drone_y" default="0" />
+  <arg name="drone_z" default="0" />
 
  <!-- px4 in gazebo -->
  <!-- single drone in gazebo environment-->
   <include file="$(find px4)/launch/posix_sitl.launch">
+    <arg name="x" value="$(arg drone_x)"/>
+    <arg name="y" value="$(arg drone_y)"/>
+    <arg name="z" value="$(arg drone_z)"/> 
   </include>
 
   
