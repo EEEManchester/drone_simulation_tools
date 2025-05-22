@@ -10,9 +10,9 @@
     <arg name="x" value="$(arg drone_x)"/>
     <arg name="y" value="$(arg drone_y)"/>
     <arg name="z" value="$(arg drone_z)"/> 
+    <arg name="gui" value="false"/> 
   </include>
 
-  
   <!-- Mavros for simulation -->
   <include file="$(find mavros)/launch/node.launch">
       <arg name="fcu_url" default="udp://:14540@127.0.0.1:14557"/>
@@ -26,9 +26,9 @@
       <arg name="config_yaml" value="$(find mavros)/launch/px4_config.yaml" />
   </include>
 
- <!-- Pkg fake qualisys-->
+ <!-- Pkg fake vicon-->
  <!-- get drone pose and generte mocap topic vision/drone-->
-  <include file="$(find fake_qualisys)/launch/fake_vicon.launch">
+  <include file="$(find fake_vicon)/launch/fake_vicon.launch">
     <arg name="drone_name" value="drone"/>  <!-- output topic is /qualisys/drone -->
     <arg name="gazebo_drone_link_name" value="iris::base_link"/> <!-- iris::base_link is the base link of drone mode -->
     <arg name="mocap_rate" value="200"/>

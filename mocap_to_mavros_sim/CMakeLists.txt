@@ -5,7 +5,6 @@ add_compile_options(-std=c++11)
 find_package(catkin REQUIRED COMPONENTS
 	roscpp
 	std_msgs
-	qualisys
 	geometry_msgs
 )
 
@@ -13,7 +12,7 @@ find_package(Eigen3 3.3 REQUIRED NO_MODULE)
 
 catkin_package(
 	LIBRARIES 
-	CATKIN_DEPENDS qualisys
+	CATKIN_DEPENDS 
   DEPENDS
 )
 

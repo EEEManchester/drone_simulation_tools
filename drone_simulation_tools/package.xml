@@ -49,13 +49,13 @@
   <!-- Use doc_depend for packages you need only for building documentation: -->
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
-  <build_depend>fake_qualisys</build_depend>
+  <build_depend>fake_vicon</build_depend>
   <build_depend>mavros</build_depend>
   <build_depend>mocap_to_mavros_sim</build_depend>
-  <build_export_depend>fake_qualisys</build_export_depend>
+  <build_export_depend>fake_vicon</build_export_depend>
   <build_export_depend>mavros</build_export_depend>
   <build_export_depend>mocap_to_mavros_sim</build_export_depend>
-  <exec_depend>fake_qualisys</exec_depend>
+  <exec_depend>fake_vicon</exec_depend>
   <exec_depend>mavros</exec_depend>
   <exec_depend>mocap_to_mavros_sim</exec_depend>
 

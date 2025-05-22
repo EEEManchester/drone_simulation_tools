@@ -8,7 +8,7 @@ project(drone_simulation_tools)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  fake_qualisys
+  fake_vicon
   mavros
   mocap_to_mavros_sim
 )
@@ -105,7 +105,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES drone_simulation_tools
-#  CATKIN_DEPENDS fake_qualisys mavros mocap_to_mavros_sim
+#  CATKIN_DEPENDS fake_vicon mavros mocap_to_mavros_sim
 #  DEPENDS system_lib
 )
 

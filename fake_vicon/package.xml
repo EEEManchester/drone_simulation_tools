@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>fake_qualisys</name>
+  <name>fake_vicon</name>
   <version>0.1.0</version>
   <description>
     Publishes faked qualisys mocap data.
@@ -17,12 +17,10 @@
   <!-- system dependencies -->
   <build_depend>roscpp</build_depend>
   <build_depend>tf</build_depend>
-  <build_depend>qualisys</build_depend>
   <build_depend>eigen</build_depend>
 
 
   <!-- run dependencies -->
-  <exec_depend>qualisys</exec_depend>
 
 <export>
 </export>

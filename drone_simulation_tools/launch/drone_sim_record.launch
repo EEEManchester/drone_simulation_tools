@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-    <!-- Launch Mavros -->
- <arg name = "bags_directory" value = "/home/p00972zl/Desktop/Drone/Simu_Bag/"/>
-
- <node pkg="rosbag" type="record" name="rosbag_record_cam"
-       args="record -o $(arg bags_directory) /vicon/drone /mavros/vision_pose/pose /mavros/local_position/pose /mavros/local_position/velocity_local /mavros/setpoint_raw/attitude reference/setpoint reference/yaw" />
-
-</launch>

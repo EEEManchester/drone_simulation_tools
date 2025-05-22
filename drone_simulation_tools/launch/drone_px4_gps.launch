@@ -1,16 +1,20 @@
 <?xml version="1.0"?>
 <launch>
-
-<remap from="/vicon/Parl1" to="/vicon/drone" />
+  <arg name="drone_x" default="0" />
+  <arg name="drone_y" default="0" />
+  <arg name="drone_z" default="0" />
 
  <!-- px4 in gazebo -->
  <!-- single drone in gazebo environment-->
   <include file="$(find px4)/launch/posix_sitl.launch">
+    <arg name="x" value="$(arg drone_x)"/>
+    <arg name="y" value="$(arg drone_y)"/>
+    <arg name="z" value="$(arg drone_z)"/> 
+    <arg name="gui" value="false"/> 
   </include>
 
-
+  
   <!-- Mavros for simulation -->
-  <group ns="drone">
   <include file="$(find mavros)/launch/node.launch">
       <arg name="fcu_url" default="udp://:14540@127.0.0.1:14557"/>
       <arg name="gcs_url" default="" />
@@ -21,20 +25,6 @@
       <arg name="respawn_mavros" default="false" />
       <arg name="pluginlists_yaml" value="$(find mavros)/launch/px4_pluginlists.yaml" />
       <arg name="config_yaml" value="$(find mavros)/launch/px4_config.yaml" />
-  </include>
-  </group>
-
- <!-- Pkg fake qualisys-->
- <!-- get drone pose and generte mocap topic vision/drone-->
-  <include file="$(find fake_qualisys)/launch/fake_vicon.launch">
-    <arg name="drone_name" value="Parl1"/>  <!-- output topic is /vicon/drone -->
-    <arg name="gazebo_drone_link_name" value="iris::base_link"/> <!-- iris::base_link is the base link of drone mode -->
-    <arg name="mocap_rate" value="200"/>
-    
-
-    <param name="drone_name" type="str" value="$(arg drone_name)"/>
-    <param name="link_name" type="str" value="$(arg gazebo_drone_link_name)"/>
-    <param name="mocap_rate" type="int" value="$(arg mocap_rate)"/>
   </include>
 
 </launch>
